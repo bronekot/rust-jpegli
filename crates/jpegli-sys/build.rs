@@ -112,7 +112,15 @@ fn build_vendored(vendor_root: &Path, prefer_static: bool) -> BuildArtifacts {
         cfg.define("CMAKE_TOOLCHAIN_FILE", toolchain_file);
     }
 
+    let is_msvc = env::var("CARGO_CFG_TARGET_ENV").as_deref() == Ok("msvc");
     match env::var("PROFILE").as_deref() {
+        Ok("debug") if is_msvc => {
+            // Rust on windows-msvc links against the release CRT even for debug
+            // builds. Building vendored JPEGli as MSVC "Debug" produces /MDd and
+            // _ITERATOR_DEBUG_LEVEL=2, which does not link with the Rust world or
+            // with the shim compiled by cc-rs.
+            cfg.profile("RelWithDebInfo");
+        }
         Ok("debug") => {
             cfg.profile("Debug");
         }

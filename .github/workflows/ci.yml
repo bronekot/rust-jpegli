@@ -14,8 +14,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-        with:
-          submodules: recursive
 
       - uses: dtolnay/rust-toolchain@1.94.0
         with:
@@ -38,8 +36,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-        with:
-          submodules: recursive
 
       - uses: dtolnay/rust-toolchain@1.94.0
 
@@ -56,6 +52,7 @@ jobs:
           -DJPEGXL_ENABLE_JPEGLI_LIBJPEG=OFF
           -DJPEGXL_ENABLE_MANPAGES=OFF
           -DJPEGXL_ENABLE_OPENEXR=OFF
+          -DJPEGXL_ENABLE_SKCMS=ON
           -DJPEGXL_ENABLE_SJPEG=OFF
           -DJPEGXL_ENABLE_TCMALLOC=OFF
           -DJPEGXL_ENABLE_TOOLS=OFF

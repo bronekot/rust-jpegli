@@ -63,7 +63,7 @@ pub struct jpegli_rs_output {
     pub error_message: *mut c_char,
 }
 
-extern "C" {
+unsafe extern "C" {
     pub fn jpegli_rs_encode(
         config: *const jpegli_rs_encoder_config,
         image: *const jpegli_rs_image_view,

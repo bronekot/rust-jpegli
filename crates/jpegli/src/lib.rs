@@ -112,18 +112,18 @@ impl EncoderConfig {
             ));
         }
 
-        if let Some(quality) = self.quality {
-            if !(1..=100).contains(&quality) {
-                return Err(Error::InvalidConfig("quality must be in the range 1..=100"));
-            }
+        if let Some(quality) = self.quality
+            && !(1..=100).contains(&quality)
+        {
+            return Err(Error::InvalidConfig("quality must be in the range 1..=100"));
         }
 
-        if let Some(distance) = self.distance {
-            if !distance.is_finite() || !(0.0..=25.0).contains(&distance) {
-                return Err(Error::InvalidConfig(
-                    "distance must be finite and in the range 0.0..=25.0",
-                ));
-            }
+        if let Some(distance) = self.distance
+            && (!distance.is_finite() || !(0.0..=25.0).contains(&distance))
+        {
+            return Err(Error::InvalidConfig(
+                "distance must be finite and in the range 0.0..=25.0",
+            ));
         }
 
         if matches!(self.icc_profile.as_ref(), Some(profile) if profile.is_empty()) {

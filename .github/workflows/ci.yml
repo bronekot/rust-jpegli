@@ -17,7 +17,7 @@ jobs:
         with:
           submodules: recursive
 
-      - uses: dtolnay/rust-toolchain@stable
+      - uses: dtolnay/rust-toolchain@1.94.0
         with:
           components: clippy, rustfmt
 
@@ -41,7 +41,7 @@ jobs:
         with:
           submodules: recursive
 
-      - uses: dtolnay/rust-toolchain@stable
+      - uses: dtolnay/rust-toolchain@1.94.0
 
       - name: Configure upstream system build
         run: >

@@ -129,22 +129,22 @@ impl<'a> EncodeConfig<'a> {
             });
         }
 
-        if let Some(quality) = self.quality {
-            if !(1..=100).contains(&quality) {
-                return Err(EncodeError {
-                    kind: EncodeErrorKind::InvalidConfig,
-                    message: Some("quality must be in the range 1..=100".to_owned()),
-                });
-            }
+        if let Some(quality) = self.quality
+            && !(1..=100).contains(&quality)
+        {
+            return Err(EncodeError {
+                kind: EncodeErrorKind::InvalidConfig,
+                message: Some("quality must be in the range 1..=100".to_owned()),
+            });
         }
 
-        if let Some(distance) = self.distance {
-            if !distance.is_finite() || !(0.0..=25.0).contains(&distance) {
-                return Err(EncodeError {
-                    kind: EncodeErrorKind::InvalidConfig,
-                    message: Some("distance must be finite and in the range 0.0..=25.0".to_owned()),
-                });
-            }
+        if let Some(distance) = self.distance
+            && (!distance.is_finite() || !(0.0..=25.0).contains(&distance))
+        {
+            return Err(EncodeError {
+                kind: EncodeErrorKind::InvalidConfig,
+                message: Some("distance must be finite and in the range 0.0..=25.0".to_owned()),
+            });
         }
 
         if matches!(self.icc_profile, Some(profile) if profile.is_empty()) {

@@ -191,12 +191,11 @@ fn link_system(vendor_root: &Path, prefer_static: bool) -> BuildArtifacts {
     if let Some(pkg) = env::var_os("JPEGLI_SYS_PKG_CONFIG")
         .map(PathBuf::from)
         .or_else(which_pkg_config)
+        && let Some(pkg_info) = query_pkg_config(&pkg, prefer_static)
     {
-        if let Some(pkg_info) = query_pkg_config(&pkg, prefer_static) {
-            artifacts.include_dirs.extend(pkg_info.include_dirs);
-            artifacts.link_search_dirs.extend(pkg_info.link_search_dirs);
-            artifacts.libraries.extend(pkg_info.libraries);
-        }
+        artifacts.include_dirs.extend(pkg_info.include_dirs);
+        artifacts.link_search_dirs.extend(pkg_info.link_search_dirs);
+        artifacts.libraries.extend(pkg_info.libraries);
     }
 
     if let Ok(root) = env::var("JPEGLI_SYS_ROOT") {

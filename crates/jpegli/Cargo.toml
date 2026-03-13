@@ -1,0 +1,29 @@
+[package]
+name = "jpegli"
+version.workspace = true
+edition.workspace = true
+license = "MIT OR Apache-2.0"
+rust-version.workspace = true
+description = "Safe Rust wrapper for encoding JPEG images with Google JPEGli"
+include = [
+    "/Cargo.toml",
+    "/LICENSE-APACHE",
+    "/LICENSE-MIT",
+    "/examples/**",
+    "/src/**",
+    "/tests/**",
+]
+
+[features]
+default = ["vendored", "static"]
+vendored = ["jpegli-sys/vendored"]
+system = ["jpegli-sys/system"]
+static = ["jpegli-sys/static"]
+shared = ["jpegli-sys/shared"]
+generate-bindings = ["jpegli-sys/generate-bindings"]
+
+[dependencies]
+jpegli-sys = { path = "../jpegli-sys", version = "0.1.0", default-features = false }
+
+[dev-dependencies]
+image.workspace = true

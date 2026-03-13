@@ -1,0 +1,70 @@
+[package]
+name = "jpegli-sys"
+version.workspace = true
+edition.workspace = true
+license-file = "PACKAGE-LICENSES.md"
+rust-version.workspace = true
+links = "jpegli"
+build = "build.rs"
+description = "Low-level bindings and vendored build integration for Google JPEGli"
+include = [
+    "/Cargo.toml",
+    "/LICENSE-APACHE",
+    "/LICENSE-MIT",
+    "/PACKAGE-LICENSES.md",
+    "/THIRD_PARTY_NOTICES.md",
+    "/build.rs",
+    "/src/**",
+    "/vendor/jpegli/AUTHORS",
+    "/vendor/jpegli/CMakeLists.txt",
+    "/vendor/jpegli/LICENSE",
+    "/vendor/jpegli/PATENTS",
+    "/vendor/jpegli/cmake/**",
+    "/vendor/jpegli/cmake_uninstall.cmake.in",
+    "/vendor/jpegli/lib/CMakeLists.txt",
+    "/vendor/jpegli/lib/base/**",
+    "/vendor/jpegli/lib/cms/**",
+    "/vendor/jpegli/lib/jpegli/**",
+    "/vendor/jpegli/lib/jpegli.cmake",
+    "/vendor/jpegli/lib/jxl_cms.cmake",
+    "/vendor/jpegli/lib/jxl_lists.cmake",
+    "/vendor/jpegli/lib/jxl_tests.cmake",
+    "/vendor/jpegli/lib/jxl_threads.cmake",
+    "/vendor/jpegli/lib/threads/**",
+    "/vendor/jpegli/third_party/CMakeLists.txt",
+    "/vendor/jpegli/third_party/highway/CMakeLists.txt",
+    "/vendor/jpegli/third_party/highway/CMakeLists.txt.in",
+    "/vendor/jpegli/third_party/highway/LICENSE",
+    "/vendor/jpegli/third_party/highway/LICENSE-BSD3",
+    "/vendor/jpegli/third_party/highway/cmake/**",
+    "/vendor/jpegli/third_party/highway/hwy/**",
+    "/vendor/jpegli/third_party/highway/libhwy.pc.in",
+    "/vendor/jpegli/third_party/libjpeg-turbo/LICENSE.md",
+    "/vendor/jpegli/third_party/libjpeg-turbo/README.ijg",
+    "/vendor/jpegli/third_party/libjpeg-turbo/jconfig.h.in",
+    "/vendor/jpegli/third_party/libjpeg-turbo/jmorecfg.h",
+    "/vendor/jpegli/third_party/libjpeg-turbo/jpeglib.h",
+    "/vendor/jpegli/third_party/libjpeg-turbo/win/jconfig.h.in",
+    "/vendor/jpegli/third_party/skcms.cmake",
+    "/vendor/jpegli/third_party/skcms/LICENSE",
+    "/vendor/jpegli/third_party/skcms/skcms.cc",
+    "/vendor/jpegli/third_party/skcms/skcms.h",
+    "/vendor/jpegli/third_party/skcms/src/**",
+    "/vendor/jpegli/third_party/testing.cmake",
+    "/vendor/jpegli/tools/**",
+]
+
+[dependencies]
+
+[build-dependencies]
+bindgen = { version = "0.71", optional = true }
+cc.workspace = true
+cmake.workspace = true
+
+[features]
+default = ["vendored", "static"]
+vendored = []
+system = []
+static = []
+shared = []
+generate-bindings = ["dep:bindgen"]
